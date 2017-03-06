@@ -22,7 +22,12 @@ Extract accepts as an argument a regex with a single capture group, and will rea
 # Installation
 
 From source:
-    > cargo install
+    
+    cargo install
+    
+From `crates.io`:
+
+    cargo install extract
     
 # License
 

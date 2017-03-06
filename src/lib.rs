@@ -1,6 +1,5 @@
 #![recursion_limit = "1024"]
 
-extern crate futures;
 pub extern crate regex;
 
 #[macro_use]

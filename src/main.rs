@@ -8,15 +8,14 @@ use extract::errors::*;
 use extract::search::*;
 
 fn do_search<T>(re: &Regex, input: T) -> Result<()>
-    where T: BufRead {
+    where T: BufRead
+{
 
     match re.captures_len() {
         2 => {}
-        0 ... 1 => return Err(ErrorKind::NothingToExtract.into()),
+        0...1 => return Err(ErrorKind::NothingToExtract.into()),
         _ => return Err(ErrorKind::TooManyCaptures.into()),
     }
-
-    println!("cap len: {}", re.captures_len());
 
     for result in search(&re, input) {
         let result = result?;
@@ -32,7 +31,7 @@ fn run() -> Result<()> {
         let stdin = stdin.lock();
         do_search(&re, stdin)
     } else {
-        return Err(ErrorKind::NoMatchingPattern.into())
+        return Err(ErrorKind::NoMatchingPattern.into());
     }
 }
 

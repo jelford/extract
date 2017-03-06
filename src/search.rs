@@ -1,5 +1,5 @@
 
-use std::io::{BufRead};
+use std::io::BufRead;
 use std::io;
 use std::fmt::Display;
 use regex::Regex;
@@ -14,21 +14,21 @@ impl Display for Match {
     fn fmt(&self, fmt: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         match self {
             &Match::Simple(ref s) => write!(fmt, "{}", s),
-            _ => unimplemented!()
+            _ => unimplemented!(),
         }
     }
 }
 
 pub struct MatchIterator<'a, T>
-    where T : Iterator<Item=io::Result<String>> {
-        source: T,
-        regex: &'a Regex,
-
+    where T: Iterator<Item = io::Result<String>>
+{
+    source: T,
+    regex: &'a Regex,
 }
 
-impl <'a, T> MatchIterator<'a, T>
-    where T: Iterator<Item=io::Result<String>> {
-
+impl<'a, T> MatchIterator<'a, T>
+    where T: Iterator<Item = io::Result<String>>
+{
     pub fn all_or_error(self) -> Result<Vec<Match>> {
         let mut result = Vec::new();
         for m in self {
@@ -51,18 +51,16 @@ impl <'a, T> MatchIterator<'a, T>
     }
 }
 
-impl <'a, T> Iterator for MatchIterator<'a, T>
-    where T : Iterator<Item=io::Result<String>> {
-
-        type Item=Result<Match>;
+impl<'a, T> Iterator for MatchIterator<'a, T>
+    where T: Iterator<Item = io::Result<String>>
+{
+    type Item = Result<Match>;
 
     fn next(&mut self) -> Option<Result<Match>> {
         while let Some(line) = self.source.next() {
             let r = match line {
-                Err(e) => { Some(Err(::std::convert::From::from(e))) },
-                Ok(l) => {
-                    self.try_match(&l)
-                }
+                Err(e) => Some(Err(::std::convert::From::from(e))),
+                Ok(l) => self.try_match(&l),
             };
             if r.is_some() {
                 return r;
@@ -73,11 +71,12 @@ impl <'a, T> Iterator for MatchIterator<'a, T>
 }
 
 pub fn search<T>(re: &Regex, from: T) -> MatchIterator<io::Lines<T>>
-    where T: BufRead {
+    where T: BufRead
+{
 
     MatchIterator {
         source: from.lines(),
-        regex: re
+        regex: re,
     }
 }
 
@@ -98,7 +97,8 @@ mod tests {
     }
 
     fn lines(from: &str) -> TempLines {
-        let dir = TempDir::new("extract-test").expect("Cannot create temporary directory for tests");
+        let dir = TempDir::new("extract-test")
+            .expect("Cannot create temporary directory for tests");
         let fpath = dir.path().join("temp_file");
         let mut file = File::create(&fpath).expect("Unable to create temporary file for test");
         file.write(&from.as_bytes());
@@ -113,7 +113,8 @@ mod tests {
 
     impl TempLines {
         fn reader(&self) -> BufReader<File> {
-            let file = File::open(&self.file).expect("Unable to open temporary file created for test");
+            let file = File::open(&self.file)
+                .expect("Unable to open temporary file created for test");
             BufReader::new(file)
         }
     }
@@ -146,8 +147,12 @@ mod tests {
     fn match_contains_text_from_capture_group() {
         let ref result = matches_for(r"(\d+)", "hello42world")[0];
         match result {
-            &Match::Simple(ref r) => { assert_eq!(r, "42"); }
-            _ => { panic!(); }
+            &Match::Simple(ref r) => {
+                assert_eq!(r, "42");
+            }
+            _ => {
+                panic!();
+            }
         }
     }
 }

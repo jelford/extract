@@ -87,12 +87,12 @@ mod tests {
     use self::tempdir::TempDir;
     use std::fs::File;
     use std::path::PathBuf;
-    use std::io::{Write, BufRead, BufReader};
+    use std::io::{Write, BufReader};
 
     use super::*;
 
     struct TempLines {
-        td: TempDir,
+        _td: TempDir,
         file: PathBuf,
     }
 
@@ -101,12 +101,12 @@ mod tests {
             .expect("Cannot create temporary directory for tests");
         let fpath = dir.path().join("temp_file");
         let mut file = File::create(&fpath).expect("Unable to create temporary file for test");
-        file.write(&from.as_bytes());
+        file.write(&from.as_bytes()).expect("Unable to write to temporary file in test setup");
         drop(file);
 
 
         TempLines {
-            td: dir,
+            _td: dir,
             file: PathBuf::from(fpath),
         }
     }

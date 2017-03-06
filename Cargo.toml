@@ -2,6 +2,11 @@
 name = "extract"
 version = "0.1.0"
 authors = ["James Elford <james.p.elford@gmail.com>"]
+description = "A tool for extracting text from text."
+repository = "https://github.com/jelford/extract/"
+readme = "README.md"
+keywords = ["text", "regex"]
+license = "MIT / Apache-2.0"
 
 [dependencies]
 error-chain = "0.10.0"

@@ -6,15 +6,13 @@ use regex::Regex;
 use errors::*;
 
 pub enum Match {
-    Simple(String),
-    MultiMatch(Vec<String>),
+    Simple(String)
 }
 
 impl Display for Match {
     fn fmt(&self, fmt: &mut ::std::fmt::Formatter) -> ::std::fmt::Result {
         match self {
-            &Match::Simple(ref s) => write!(fmt, "{}", s),
-            _ => unimplemented!(),
+            &Match::Simple(ref s) => write!(fmt, "{}", s)
         }
     }
 }
@@ -149,9 +147,6 @@ mod tests {
         match result {
             &Match::Simple(ref r) => {
                 assert_eq!(r, "42");
-            }
-            _ => {
-                panic!();
             }
         }
     }

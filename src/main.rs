@@ -1,6 +1,8 @@
 extern crate extract;
 
-use std::env;
+#[macro_use]
+extern crate clap;
+
 use std::io::{stdin, stderr, BufRead};
 
 use extract::regex::Regex;
@@ -25,7 +27,14 @@ fn do_search<T>(re: &Regex, input: T) -> Result<()>
 }
 
 fn run() -> Result<()> {
-    if let Some(target) = env::args().nth(1) {
+    let args = clap_app!(extract =>
+        (version: crate_version!())
+        (about: "Extract text from text. \nReads from stdin, printing text captured by PATTERN.")
+        (@arg PATTERN: +required "The pattern to search for. Provide a regex with a single match group.")
+
+    ).get_matches();
+
+    if let Some(target) = args.value_of("PATTERN") {
         let re = try!(Regex::new(&target));
         let stdin = stdin();
         let stdin = stdin.lock();

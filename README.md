@@ -45,4 +45,4 @@ Feel free to open an issue / PR. I'd be interested in adding support for more st
 
 * Can't you use `sed` for this?
 
-Not first time, normally. Maybe your linux-fu is better than mine.
+Not first time, normally. Maybe your sed-fu is better than mine. This tool was originally created when I needed to extract ids from the output of `xinput --list`, in frustration after the fourth attempt to deliver the correct incantations to `sed`.

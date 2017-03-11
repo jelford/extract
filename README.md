@@ -1,4 +1,6 @@
 # extract
+[![Build Status](https://travis-ci.org/jelford/extract.svg?branch=master)](https://travis-ci.org/jelford/extract) 
+[![crates.io](https://img.shields.io/crates/v/extract.svg)](https://crates.io/crates/extract)
 
 Extract text from text using a regex - a simple way to consume keyed fields from poorly-(or un-)structured text.
 
@@ -8,7 +10,7 @@ Extract accepts as an argument a regex with a single capture group, and will rea
 
     > echo "hello subject=world" | extract "subject=(.+)"
     world
-    
+
 `extract` keeps reading until it reaches the end of input, processing lines one-at-a-time:
 
     > cat multiline
@@ -17,18 +19,18 @@ Extract accepts as an argument a regex with a single capture group, and will rea
     > cat multiline | extract "subject=(\w+)"
     world
     Dorris
-    
-    
+
+
 # Installation
 
 From source:
-    
+
     cargo install
-    
+
 From `crates.io`:
 
     cargo install extract
-    
+
 # License
 
 MIT / Apache 2.

@@ -5,12 +5,12 @@ jobs:
     docker:
       - image: alexcrichton/rust-slave-dist:2017-02-02
         environment:
-          CARGO: ~/rust/bin/cargo
+          CARGO: ~/.cargo/bin/cargo
     steps:
       - checkout
       - run: 
           name: Install Rust
-          command: curl https://sh.rustup.rs -sSf | sh -s -- --prefix=$HOME/rust -y
+          command: curl https://sh.rustup.rs -sSf | sh -s -- -y
       - run:
           name: build
           command: $CARGO build -v

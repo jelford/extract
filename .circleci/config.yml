@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: 
           name: Install Rust
-          command: curl https://sh.rustup.rs -sSf | sh -s -- --prefix $HOME/rust -y
+          command: curl https://sh.rustup.rs -sSf | sh -s -- --prefix=$HOME/rust -y
       - run:
           name: build
           command: $CARGO build -v

@@ -13,11 +13,14 @@ jobs:
           command: 
             curl https://sh.rustup.rs -sSf | sh -s -- -y -v;
             . ~/.profile;
-            ls -la ~;
             env
       - run:
           name: build
-          command: cargo build -v
+          command: 
+            ~/.profile;
+            cargo build -v
       - run:
           name: test
-          command: cargo test
+          command: 
+            ~/.profile;
+            cargo test

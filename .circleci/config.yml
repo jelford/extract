@@ -10,10 +10,14 @@ jobs:
       - checkout
       - run: 
           name: Install Rust
-          command: curl https://sh.rustup.rs -sSf | sh -s -- -y
+          command: 
+            curl https://sh.rustup.rs -sSf | sh -s -- -y -v
+            . ~/.profile
+            ls -la ~
+            env
       - run:
           name: build
-          command: $CARGO build -v
+          command: cargo build -v
       - run:
           name: test
-          command: $CARGO test
+          command: cargo test

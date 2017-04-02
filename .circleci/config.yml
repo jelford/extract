@@ -4,7 +4,7 @@ jobs:
     working_directory: /buildslave/extract
     docker:
       - image: alexcrichton/rust-slave-dist:2017-02-02
-      - environment:
+        environment:
           CARGO: ~/rust/bin/cargo
     steps:
       - checkout
@@ -17,4 +17,3 @@ jobs:
       - run:
           name: test
           command: $CARGO test
-          

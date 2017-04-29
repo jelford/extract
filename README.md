@@ -43,7 +43,7 @@ Feel free to open an issue / PR. I'd be interested in adding support for more st
 
 * How is this different to `grep -o`?
 
-`extract` only prints the catured group, not the whole match.
+`extract` only prints the captured group, not the whole match.
 
 * Can't you use `sed` for this?
 

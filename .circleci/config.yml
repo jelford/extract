@@ -11,19 +11,19 @@ jobs:
             - extract-rust-deps-{{ checksum "Cargo.lock" }}
       - run: 
           name: Install Rust
-          command: 
+          command: |
             curl https://sh.rustup.rs -sSf -o rustup-init.sh
             chmod +x rustup-init.sh
             ./rustup-init.sh
       - run:
           name: build
-          command: 
-            . ~/.profile;
+          command: |
+            . ~/.profile
             cargo build -v --release
       - run:
           name: test
-          command: 
-            . ~/.profile;
+          command: |
+            . ~/.profile
             cargo test
       - save_cache:
           key: extract-rust-deps-{{ checksum "Cargo.lock" }}

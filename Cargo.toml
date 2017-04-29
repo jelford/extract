@@ -1,6 +1,6 @@
 [package]
 name = "extract"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["James Elford <james.p.elford@gmail.com>"]
 description = "A tool for extracting text from text."
 repository = "https://github.com/jelford/extract/"

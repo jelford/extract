@@ -4,31 +4,28 @@ jobs:
     working_directory: /buildslave/extract
     docker:
       - image: alexcrichton/rust-slave-dist:2017-02-02
-        environment:
-          CARGO: ~/.cargo/bin/cargo
     steps:
       - checkout
       - restore_cache:
           keys: 
-            - extract-rust-deps-{{ checksum "Cargo.lock" }}
+            - extract-rust-deps-{{ checksum "Cargo.lock" }}-release
       - run: 
           name: Install Rust
           command: 
-            curl https://sh.rustup.rs -sSf | sh -s -- -y -v;
-            . ~/.profile;
-            env
+            curl https://sh.rustup.rs -sSf -o rustup-init.sh
+            chmod +x rustup-init.sh
+            ./rustup-init.sh
       - run:
           name: build
           command: 
             . ~/.profile;
-            cargo build -v
-      - save_cache:
-          key: extract-rust-deps-{{ checksum "Cargo.lock" }}
-          paths:
-            - ~/.cargo/registry
-            - /buildslave/extract/target/debug
+            cargo build -v --release
       - run:
           name: test
           command: 
             . ~/.profile;
             cargo test
+      - save_cache:
+          key: extract-rust-deps-{{ checksum "Cargo.lock" }}-release
+          path:
+            - ~/.cargo/registry

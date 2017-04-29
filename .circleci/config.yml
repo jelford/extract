@@ -8,7 +8,7 @@ jobs:
       - checkout
       - restore_cache:
           keys: 
-            - extract-rust-deps-{{ checksum "Cargo.lock" }}-release
+            - extract-rust-deps-{{ checksum "Cargo.lock" }}
       - run: 
           name: Install Rust
           command: 
@@ -26,6 +26,6 @@ jobs:
             . ~/.profile;
             cargo test
       - save_cache:
-          key: extract-rust-deps-{{ checksum "Cargo.lock" }}-release
-          path:
+          key: extract-rust-deps-{{ checksum "Cargo.lock" }}
+          paths:
             - ~/.cargo/registry
